@@ -39,14 +39,8 @@ const add = ([firstNum, secondNum], response) => {
 
 const saveDetails = (queries) => {
   const details = {};
-  // multiple values should be in array
 
   queries.forEach(({ fieldName, fieldValue }) => {
-
-    if (details[fieldName]) {
-      Array.isArray(details[fieldName]) ?
-        details[fieldName].push(fieldValue) : details[fieldName].split();
-    }
     details[fieldName] = fieldValue;
   });
 
