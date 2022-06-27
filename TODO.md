@@ -1,13 +1,22 @@
 # TODO
-- [ ] Create links for homepage
-- [ ] Create the html of abeliophyllum
-- [ ] Create the css of abeliophyllum
-- [ ] Create the html of ageratum
-- [ ] Create the css of ageratum
-
+- [ ] Handle comment
+- [ ] Implement download
+- [ ] Apply css properly
+ - [ ] Homepage
+ - [ ] Abeliophyllum
+ - [ ] Ageratum
+ - [ ] Guest Book
 # MAYBE
 
 # DONE 
+- [x] Create html for guestBook
+- [x] Create css for guestBook
+- [x] Create links to homepage
+- [x] Create links for homepage
+- [x] Create the html of ageratum
+- [x] Create the css of ageratum
+- [x] Create the css of abeliophyllum
+- [x] Create the html of abeliophyllum
 - [x] Create the html of firstPage
 - [x] Create the css for the first page
 - [x] Download data in .data

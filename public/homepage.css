@@ -5,8 +5,7 @@ body {
   font-family: serif;
 }
 
-.heading {
-  /* font-family: sans-serif; */
+.title {
   text-align: right;
   color: rgb(251, 180, 87);
   font-weight: 900;

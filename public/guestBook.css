@@ -1,0 +1,23 @@
+body {
+  width: 1500px;
+  height: 1500px;
+  margin: 0 auto;
+  font-family: serif;
+}
+
+h1 {
+  text-align: center;
+  color: rgb(251, 180, 87);
+  padding-top: 2%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid rgb(140, 139, 139);
+}
+
+span {
+  font-weight: 100;
+}
+
+form {
+  padding-bottom: 1%;
+  border-bottom: 1px solid gray;
+}
