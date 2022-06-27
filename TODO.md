@@ -1,14 +1,18 @@
 # TODO
-- [ ] Handle comment
-- [ ] Implement download
+- [x] Handle comment
+  - [x] Store comment in json
+  - [x] Add date
+  - [ ] Display in guestBook
 - [ ] Apply css properly
  - [ ] Homepage
  - [ ] Abeliophyllum
  - [ ] Ageratum
  - [ ] Guest Book
+
 # MAYBE
 
 # DONE 
+- [x] Implement download
 - [x] Create html for guestBook
 - [x] Create css for guestBook
 - [x] Create links to homepage
