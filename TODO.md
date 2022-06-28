@@ -1,7 +1,10 @@
 # TODO
-- [ ] Show error if name or comment is empty 
+- [ ] Queries are optional
+- [ ] Should only work for GET method
+- [ ] Implement redirection
 - [ ] Redirect comments into guestBook page
 - [ ] Replace guestBook.html after generated new comments
+- [ ] Think about array instead of object while storing comments
 - [ ] Apply css properly
  - [ ] Homepage
  - [ ] Abeliophyllum
@@ -13,6 +16,9 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Maintain contract of handler in comment
+- [x] Consider renaming saveComment to parseComment
+- [x] Show error if name or comment is empty 
 - [x] Handle comment
   - [x] Store comment in json
   - [x] Add date
