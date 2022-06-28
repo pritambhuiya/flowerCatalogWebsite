@@ -3,7 +3,7 @@ const { Response } = require('./response.js');
 
 const isRoot = (path) => path === '/';
 
-const writeFile = (database, databaseContent) =>
+const writeInJson = (database, databaseContent) =>
   fs.writeFileSync(database, JSON.stringify(databaseContent), 'utf8');
 
 const fileHandler = ({ resource }, response) => {
@@ -38,15 +38,24 @@ const saveComment = (queries) => {
   return details;
 };
 
-const showComments = (response, databaseContent) => {
+const getComments = (databaseContent) => {
   const comments = [];
 
   for (const commentor in databaseContent) {
     const { time, name, comment } = databaseContent[commentor];
-    comments.push(`${time}, ${name}, ${comment}`);
+    comments.unshift(`<p>${time}, ${name}: ${comment}</p>`);
   }
 
-  response.send(comments.join('\n'));
+  return comments;
+};
+
+const displayComments = (response, databaseContent) => {
+  const comments = getComments(databaseContent);
+  const formattedComments = comments.join('\n');
+
+  const guestBook = fs.readFileSync('./.data/template.html', 'utf8');
+  const guestBookPage = guestBook.replace('__COMMENTS__', formattedComments);
+  response.send(guestBookPage);
 };
 
 const comment = (queries, response) => {
@@ -54,11 +63,14 @@ const comment = (queries, response) => {
   const databaseContent = JSON.parse(fs.readFileSync(database, 'utf8'));
   const details = saveComment(queries);
 
-  databaseContent[details.name] = details;
-  writeFile(database, databaseContent);
-  showComments(response, databaseContent);
+  if (!details.name || !details.comment) {
+    return false;
+  }
 
-  // response.send('sign up successful.');
+  databaseContent[details.name] = details;
+  writeInJson(database, databaseContent);
+  displayComments(response, databaseContent);
+
   return true;
 };
 

@@ -1,8 +1,7 @@
 # TODO
-- [x] Handle comment
-  - [x] Store comment in json
-  - [x] Add date
-  - [ ] Display in guestBook
+- [ ] Show error if name or comment is empty 
+- [ ] Redirect comments into guestBook page
+- [ ] Replace guestBook.html after generated new comments
 - [ ] Apply css properly
  - [ ] Homepage
  - [ ] Abeliophyllum
@@ -10,8 +9,14 @@
  - [ ] Guest Book
 
 # MAYBE
+- [ ] Extract comment entity 
+- [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Handle comment
+  - [x] Store comment in json
+  - [x] Add date
+  - [x] Display in guestBook
 - [x] Implement download
 - [x] Create html for guestBook
 - [x] Create css for guestBook
