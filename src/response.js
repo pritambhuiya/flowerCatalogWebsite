@@ -8,7 +8,7 @@ class Response {
     this.#socket = socket;
     this.#protocol = protocol;
     this.#statusCode = 200;
-    this.#statusMessages = { 200: 'OK', 404: 'Not Found' };
+    this.#statusMessages = { 200: 'OK', 403: 'Forbidden', 404: 'Not Found' };
   }
 
   set statusCode(code) {

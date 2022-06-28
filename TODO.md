@@ -1,6 +1,4 @@
 # TODO
-- [ ] Queries are optional
-- [ ] Should only work for GET method
 - [ ] Implement redirection
 - [ ] Redirect comments into guestBook page
 - [ ] Replace guestBook.html after generated new comments
@@ -16,6 +14,8 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Queries are optional
+- [x] Should only work for GET method
 - [x] Maintain contract of handler in comment
 - [x] Consider renaming saveComment to parseComment
 - [x] Show error if name or comment is empty 
