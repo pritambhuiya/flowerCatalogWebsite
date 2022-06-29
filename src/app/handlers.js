@@ -2,6 +2,19 @@ const fs = require('fs');
 
 const isRoot = ({ pathname }) => pathname === '/';
 
+const guestBook = (request, response) => {
+  const params = {};
+  const queryParams = request.requestLine.searchParams.entries();
+
+  for (const [fieldName, fieldValue] of queryParams) {
+    params[fieldName] = fieldValue;
+  }
+
+  response.setHeader('Content-type', 'text/plain');
+  response.end(JSON.stringify(params));
+  return true;
+};
+
 const notFoundHandler = (request, response) => {
   response.statusCode = 404;
   response.setHeader('Content-length', 9);
@@ -26,4 +39,4 @@ const serveFileContent = ({ requestLine }, response) => {
   }
 };
 
-module.exports = { serveFileContent, notFoundHandler };
+module.exports = { serveFileContent, guestBook, notFoundHandler };

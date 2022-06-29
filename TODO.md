@@ -1,6 +1,8 @@
 # TODO
-- [ ] Reorganise files 
+- [ ] Store comments in array
+- [ ] Store comments in file
 - [ ] Implement redirection
+- [ ] Reorganise files 
 - [ ] Redirect comments into guestBook page
 - [ ] Replace guestBook.html after generated new comments
 - [ ] Think about array instead of object while storing comments
@@ -15,6 +17,7 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Implement guestBook
 - [x] Use npm
 - [x] Implement serveFileContent
 - [x] set requestLine in request.requestLine 

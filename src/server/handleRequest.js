@@ -1,7 +1,8 @@
-const { serveFileContent, notFoundHandler } = require('../app/handlers.js');
+const { serveFileContent, guestBook, notFoundHandler } =
+  require('../app/handlers.js');
 
 const handleRequest = (request, response) => {
-  const handlers = [serveFileContent, notFoundHandler];
+  const handlers = [serveFileContent, guestBook, notFoundHandler];
 
   for (const handler of handlers) {
     if (handler(request, response)) {
