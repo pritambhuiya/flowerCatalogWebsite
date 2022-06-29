@@ -5,7 +5,6 @@
 - [ ] Reorganise files 
 - [ ] Redirect comments into guestBook page
 - [ ] Replace guestBook.html after generated new comments
-- [ ] Think about array instead of object while storing comments
 - [ ] Apply css properly
  - [ ] Homepage
  - [ ] Abeliophyllum
@@ -17,6 +16,7 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Reorganised server and created router
 - [x] Implement guestBook
 - [x] Use npm
 - [x] Implement serveFileContent

@@ -1,3 +1,5 @@
-const { createServer } = require('./src/server.js');
+const { createServer } = require('./src/server/server.js');
 
-createServer(8000);
+const { requestHandler } = require('./src/app.js');
+
+createServer(8000, requestHandler);
