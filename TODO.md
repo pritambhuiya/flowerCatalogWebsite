@@ -1,4 +1,6 @@
 # TODO
+- [ ] Implement fileHandler
+- [ ] Reorganise files 
 - [ ] Implement redirection
 - [ ] Redirect comments into guestBook page
 - [ ] Replace guestBook.html after generated new comments
@@ -14,6 +16,13 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Extract createServer
+- [x] Set header
+ - [x] Content-length
+ - [x] Content-type
+- [x] Implement notFoundHandler
+- [x] Use URL 
+- [x] Use http 
 - [x] Queries are optional
 - [x] Should only work for GET method
 - [x] Maintain contract of handler in comment
