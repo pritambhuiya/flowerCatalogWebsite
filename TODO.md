@@ -1,5 +1,4 @@
 # TODO
-- [ ] Implement fileHandler
 - [ ] Reorganise files 
 - [ ] Implement redirection
 - [ ] Redirect comments into guestBook page
@@ -16,6 +15,9 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Use npm
+- [x] Implement serveFileContent
+- [x] set requestLine in request.requestLine 
 - [x] Extract createServer
 - [x] Set header
  - [x] Content-length

@@ -1,0 +1,23 @@
+{
+  "name": "flowercatalogwebsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pritambhuiya/flowerCatalogWebsite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pritambhuiya/flowerCatalogWebsite/issues"
+  },
+  "homepage": "https://github.com/pritambhuiya/flowerCatalogWebsite#readme",
+  "devDependencies": {
+    "mocha": "^10.0.0"
+  }
+}
