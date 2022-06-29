@@ -1,7 +1,13 @@
-const { createHandler } = require('./server/router.js');
-const { serveFileContent, guestBook, notFoundHandler } =
-  require('./app/handlers.js');
+const fs = require('fs');
+const { serveFileContent, notFoundHandler } = require('./app/handlers.js');
 
-const handlers = [serveFileContent, guestBook, notFoundHandler];
+const { createHandler } = require('./server/router.js');
+const { guestBook } = require('./app/guestBook.js');
+
+const existingComments = fs.readFileSync('.data/comments.json', 'utf8');
+const parsedComments = JSON.parse(existingComments);
+
+const handlers = [serveFileContent, guestBook(parsedComments), notFoundHandler];
 const requestHandler = createHandler(handlers);
-exports.requestHandler = requestHandler;
+
+module.exports = { requestHandler };

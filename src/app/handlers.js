@@ -1,36 +1,41 @@
 const fs = require('fs');
+const path = require('path');
 
 const isRoot = ({ pathname }) => pathname === '/';
 
-const guestBook = (request, response) => {
-  const params = {};
-  const queryParams = request.requestLine.searchParams.entries();
+const getMimeType = (filePath) => {
+  const extensions = {
+    '.txt': 'text/plain',
+    '.html': 'text/html',
+    '.css': 'text/css',
+    '.jpg': 'image/jpeg',
+    '.pdf': 'application/pdf',
+    '.gif': 'application/gif'
+  };
 
-  for (const [fieldName, fieldValue] of queryParams) {
-    params[fieldName] = fieldValue;
-  }
-
-  response.setHeader('Content-type', 'text/plain');
-  response.end(JSON.stringify(params));
-  return true;
+  const extension = path.extname(filePath);
+  return extensions[extension] || 'text/plain';
 };
 
 const notFoundHandler = (request, response) => {
   response.statusCode = 404;
   response.setHeader('Content-length', 9);
   response.setHeader('Content-type', 'text/plain');
+
   response.end('NOT FOUND');
   return true;
 };
 
-const serveFileContent = ({ requestLine }, response) => {
-  const filePath =
-    isRoot(requestLine) ? '/homepage.html' : requestLine.pathname;
+const serveFileContent = (request, response) => {
+  const { url } = request;
+  const filePath = isRoot(url) ? '/homepage.html' : url.pathname;
   const resource = './public' + filePath;
 
   try {
     const content = fs.readFileSync(resource);
-    response.setHeader('Content-type', 'text/html');
+    const mimeType = getMimeType(resource);
+
+    response.setHeader('Content-type', mimeType);
     response.end(content);
     return true;
 
@@ -39,4 +44,4 @@ const serveFileContent = ({ requestLine }, response) => {
   }
 };
 
-module.exports = { serveFileContent, guestBook, notFoundHandler };
+module.exports = { serveFileContent, notFoundHandler };

@@ -1,10 +1,6 @@
 # TODO
-- [ ] Store comments in array
-- [ ] Store comments in file
-- [ ] Implement redirection
+- [ ] Implement closur for serevFileContent
 - [ ] Reorganise files 
-- [ ] Redirect comments into guestBook page
-- [ ] Replace guestBook.html after generated new comments
 - [ ] Apply css properly
  - [ ] Homepage
  - [ ] Abeliophyllum
@@ -16,6 +12,21 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Created getMimeType
+- [x] Extract updateGuestBook
+- [x] Extract storeComment
+- [x] Extract parseComment
+- [x] Extract addComment
+- [x] Replace guestBook.html after generated new comments
+- [x] Redirect comments into guestBook page
+- [x] Implement redirection
+- [x] Store comments in file
+- [x] Store comments in array
+- [x] Move guestBook handler into guestBook.js
+- [x] Return false from guestBook when 
+ - [x] method not get
+ - [x] resource is not comment
+- [x] Make a closure of guest book
 - [x] Reorganised server and created router
 - [x] Implement guestBook
 - [x] Use npm
