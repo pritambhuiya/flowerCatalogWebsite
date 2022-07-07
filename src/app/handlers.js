@@ -17,16 +17,7 @@ const getMimeType = (filePath) => {
   return extensions[extension] || 'text/plain';
 };
 
-const notFoundHandler = (request, response) => {
-  response.statusCode = 404;
-  response.setHeader('Content-length', 9);
-  response.setHeader('Content-type', 'text/plain');
-
-  response.end('NOT FOUND');
-  return true;
-};
-
-const serveFileContent = (request, response) => {
+const serveFileContent = (request, response, next) => {
   const { url } = request;
   const filePath = isRoot(url) ? '/homepage.html' : url.pathname;
   const resource = './public' + filePath;
@@ -37,11 +28,16 @@ const serveFileContent = (request, response) => {
 
     response.setHeader('Content-type', mimeType);
     response.end(content);
-    return true;
-
   } catch (error) {
-    return false;
+    next();
   }
+};
+
+const notFoundHandler = (request, response) => {
+  response.statusCode = 404;
+  response.setHeader('Content-type', 'text/plain');
+
+  response.end('NOT FOUND');
 };
 
 module.exports = { serveFileContent, notFoundHandler };

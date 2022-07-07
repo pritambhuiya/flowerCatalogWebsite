@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 // const fs = require('fs');
 // const { serveFileContent, notFoundHandler } = require('./app/handlers.js');
-const { notFoundHandler } = require('./app/handlers.js');
+const { notFoundHandler, serveFileContent } = require('./app/handlers.js');
 
 const { createHandler } = require('./server/router.js');
 const { guestBook } = require('./app/guestBook.js');
