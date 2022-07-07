@@ -1,6 +1,4 @@
-const sessions = {};
-
-const injectSession = (req, res, next) => {
+const injectSession = sessions => (req, res, next) => {
   if (!req.cookies?.sessionId) {
     next();
     return;
