@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+/* eslint-disable max-statements */
 const fs = require('fs');
 
 const formatComments = ({ comments }) => {
@@ -46,8 +48,6 @@ const addComment = ({ bodyParams, comments }, res) => {
 
   const latestComment = createComment(name, comment);
   storeComment(comments, latestComment);
-    updateGuestBook(comments);
-  }
 
   res.statusCode = 302;
   res.setHeader('Location', '/guestBook');

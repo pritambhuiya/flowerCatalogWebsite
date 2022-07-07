@@ -1,12 +1,11 @@
 # TODO
-
-- [ ] Implement apiHandler
 - [ ] Implement injectCookies
 - [ ] Implement injectSession
 - [ ] Implement login
 - [ ] Implement logout
 - [ ] Implement signup
 - [ ] Implement closure for serveFileContent
+- [ ] Implement apiHandler
 - [ ] Reorganized files 
 - [ ] Apply css properly
  - [ ] Homepage
@@ -19,6 +18,7 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Create separate file for handlers
 - [x] Implement POST method
   - [x] NotFoundHandler
   - [x] serveFileHContent handler
