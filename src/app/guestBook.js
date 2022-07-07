@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const formatComments = (comments) => {
+const formatComments = ({ comments }) => {
   let formattedComments = '';
 
   comments.forEach(({ date, name, comment }) => {
@@ -9,15 +9,12 @@ const formatComments = (comments) => {
   return formattedComments;
 };
 
-const parseComment = ({ url }) => {
-  const rawComment = url.searchParams.entries();
-  const comment = {};
-  comment.date = new Date().toLocaleString();
-
-  for (const [fieldName, fieldValue] of rawComment) {
-    comment[fieldName] = fieldValue;
+const getParams = (rawParams) => {
+  const params = {};
+  for (const [fieldName, fieldValue] of rawParams.entries()) {
+    params[fieldName] = fieldValue;
   }
-  return comment;
+  return params;
 };
 
 const storeComment = (comments, latestComment) => {
@@ -25,37 +22,51 @@ const storeComment = (comments, latestComment) => {
   fs.writeFileSync('.data/comments.json', JSON.stringify(comments), 'utf8');
 };
 
-const updateGuestBook = (comments) => {
-  const template = fs.readFileSync('.data/template.html', 'utf8');
-  const formattedComments = formatComments(comments);
-
-  const html = template.replace('__COMMENTS__', formattedComments);
-  fs.writeFileSync('public/guestBook.html', html, 'utf8');
+const createComment = (name, comment) => {
+  const date = new Date().toLocaleString();
+  return { name, comment, date };
 };
 
-const isRequestLineInvalid = ({ url, method }) =>
-  url.pathname !== '/comment' || method !== 'GET';
+const serveGuestBook = (req, res) => {
+  const formattedComments = formatComments(req);
+  const html = req.template.replace('__COMMENTS__', formattedComments);
 
-const addComment = (latestComment, comments, response) => {
-  if (latestComment.name && latestComment.comment) {
-    storeComment(comments, latestComment);
+  res.setHeader('Content-type', 'text/html');
+  res.end(html);
+};
+
+const addComment = ({ bodyParams, comments }, res) => {
+  const { name, comment } = getParams(bodyParams);
+  if (!name || !comment) {
+    res.statusCode = 400;
+    res.setHeader('content-type', 'text/plain');
+    res.end('Need to provide name and comment');
+    return;
+  }
+
+  const latestComment = createComment(name, comment);
+  storeComment(comments, latestComment);
     updateGuestBook(comments);
   }
 
-  response.statusCode = 301;
-  response.setHeader('Content-type', 'text/html');
-  response.setHeader('Location', 'guestBook.html');
-  response.end();
-  return true;
+  res.statusCode = 302;
+  res.setHeader('Location', '/guestBook');
+  res.end();
 };
 
-const guestBook = (comments) => (request, response) => {
-  if (isRequestLineInvalid(request)) {
-    return false;
+const guestBook = (req, res, next) => {
+  const { url, method } = req;
+  if (url.pathname === '/guestBook' && method === 'GET') {
+    serveGuestBook(req, res);
+    return;
   }
 
-  const latestComment = parseComment(request);
-  return addComment(latestComment, comments, response);
+  if (url.pathname === '/add-comment' && method === 'POST') {
+    addComment(req, res);
+    return;
+  }
+
+  next();
 };
 
 module.exports = { guestBook };

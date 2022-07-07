@@ -1,11 +1,11 @@
 # TODO
-- [x] Implement POST method
-  - [x] NotFoundHandler
-  - [ ] serveFileHandler
-  - [ ] guestBookHandler
-  - [ ] apiHandler
-  - [ ] injectCookies
-  - [ ] injectSession
+
+- [ ] Implement apiHandler
+- [ ] Implement injectCookies
+- [ ] Implement injectSession
+- [ ] Implement login
+- [ ] Implement logout
+- [ ] Implement signup
 - [ ] Implement closure for serveFileContent
 - [ ] Reorganized files 
 - [ ] Apply css properly
@@ -19,6 +19,10 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Implement POST method
+  - [x] NotFoundHandler
+  - [x] serveFileHContent handler
+  - [x] guestBookHandler
 - [x] Move notFound and serveFileHandler into handlers
 - [x] Created getMimeType
 - [x] Extract updateGuestBook

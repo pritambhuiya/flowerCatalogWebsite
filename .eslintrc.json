@@ -64,7 +64,7 @@
     "no-magic-numbers": "warn",
     "no-process-exit": "error",
     "no-process-env": "error",
-    "no-return-assign": "error",
+    "no-return-assign": "off",
     "no-useless-return": "error",
     "max-depth": "error",
     "no-mixed-operators": "error",

@@ -1,12 +1,3 @@
-// const router = (request, response, handlers) => {
-//   for (const handler of handlers) {
-//     if (handler(request, response)) {
-//       return true;
-//     }
-//   }
-//   return false;
-// };
-
 const createNext = handlers => {
   let index = -1;
   const callNextHandler = (req, res) => {
