@@ -5,9 +5,11 @@ const { guestBook } = require('./app/guestBook.js');
 const { bodyParser } = require('./app/bodyParser.js');
 const { loadGuestBook } = require('./app/loadGuestBook.js');
 const { injectCookies } = require('./app/injectCookies.js');
+const { injectSession } = require('./app/injectSession.js');
 
 const handlers = [
   injectCookies,
+  injectSession,
   bodyParser,
   loadGuestBook,
   guestBook,
