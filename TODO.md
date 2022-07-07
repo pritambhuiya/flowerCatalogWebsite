@@ -1,6 +1,13 @@
 # TODO
-- [ ] Implement closur for serevFileContent
-- [ ] Reorganise files 
+- [x] Implement POST method
+  - [x] NotFoundHandler
+  - [ ] serveFileHandler
+  - [ ] guestBookHandler
+  - [ ] apiHandler
+  - [ ] injectCookies
+  - [ ] injectSession
+- [ ] Implement closure for serveFileContent
+- [ ] Reorganized files 
 - [ ] Apply css properly
  - [ ] Homepage
  - [ ] Abeliophyllum
@@ -12,6 +19,7 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Move notFound and serveFileHandler into handlers
 - [x] Created getMimeType
 - [x] Extract updateGuestBook
 - [x] Extract storeComment
@@ -27,7 +35,7 @@
  - [x] method not get
  - [x] resource is not comment
 - [x] Make a closure of guest book
-- [x] Reorganised server and created router
+- [x] Reorganized server and created router
 - [x] Implement guestBook
 - [x] Use npm
 - [x] Implement serveFileContent

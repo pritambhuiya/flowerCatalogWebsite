@@ -1,18 +1,29 @@
-const router = (request, response, handlers) => {
-  for (const handler of handlers) {
-    if (handler(request, response)) {
-      return true;
+// const router = (request, response, handlers) => {
+//   for (const handler of handlers) {
+//     if (handler(request, response)) {
+//       return true;
+//     }
+//   }
+//   return false;
+// };
+
+const createNext = handlers => {
+  let index = -1;
+  const callNextHandler = (req, res) => {
+    index++;
+    const currentHandler = handlers[index];
+    if (currentHandler) {
+      currentHandler(req, res, () => callNextHandler(req, res));
     }
-  }
-  return false;
+  };
+  return callNextHandler;
 };
 
-const createHandler = (handlers) => (request, response) => {
-  const { method, url, headers } = request;
-  request.url = new URL(`HTTP://${headers.host}${url}`);
-
-  console.log(method, request.url.pathname);
-  router(request, response, handlers);
+const createHandler = (handlers) => {
+  return (req, res) => {
+    const next = createNext(handlers);
+    next(req, res);
+  };
 };
 
 module.exports = { createHandler };
