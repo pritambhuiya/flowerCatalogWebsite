@@ -1,5 +1,4 @@
 # TODO
-- [ ] Implement injectCookies
 - [ ] Implement injectSession
 - [ ] Implement login
 - [ ] Implement logout
@@ -18,6 +17,8 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Move injectCookies into injectCookies.js
+- [x] Implement injectCookies
 - [x] Create separate file for handlers
 - [x] Implement POST method
   - [x] NotFoundHandler
