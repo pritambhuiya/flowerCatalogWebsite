@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-
 const logoutHandler = sessions =>
   ({ url, method, cookies }, res, next) => {
 

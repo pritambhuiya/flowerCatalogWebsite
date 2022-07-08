@@ -1,6 +1,3 @@
-/* eslint-disable max-statements */
-/* eslint-disable complexity */
-
 const serveLoginPage = () => `<html>
 <head>
   <title>Login</title>

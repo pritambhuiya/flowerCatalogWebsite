@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable max-statements */
 const fs = require('fs');
 
 const formatComments = ({ comments }) => {
@@ -69,4 +67,4 @@ const guestBook = (req, res, next) => {
   next();
 };
 
-module.exports = { guestBook };
+module.exports = { guestBook, getParams };

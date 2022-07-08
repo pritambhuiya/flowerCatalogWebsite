@@ -1,5 +1,4 @@
 # TODO
-- [ ] Implement signup
 - [ ] Implement closure for serveFileContent
 - [ ] Implement apiHandler
 - [ ] Reorganized files 
@@ -11,11 +10,14 @@
 
 # MAYBE
 - [ ] Refactor guestBook
+- [ ] Refactor signupHandler
 - [ ] Refactor loginHandler
 - [ ] Extract comment entity 
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Implement signup handler
+- [x] Move signup into signupHandler.js
 - [x] Implement logout
 - [x] Move logout into logoutHandler.js
 - [x] Move login into loginHandler.js
