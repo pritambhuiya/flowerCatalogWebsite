@@ -15,7 +15,7 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
-- [x] Moved login into login.js
+- [x] Moved login into loginHandler.js
 - [x] Implement login
 - [x] Move injectSession into injectSession.js
 - [x] Implement injectSession
