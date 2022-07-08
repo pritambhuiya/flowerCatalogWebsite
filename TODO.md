@@ -1,5 +1,4 @@
 # TODO
-- [ ] Implement logout
 - [ ] Implement signup
 - [ ] Implement closure for serveFileContent
 - [ ] Implement apiHandler
@@ -11,11 +10,15 @@
  - [ ] Guest Book
 
 # MAYBE
+- [ ] Refactor guestBook
+- [ ] Refactor loginHandler
 - [ ] Extract comment entity 
 - [ ] Extract guestBook entity 
 
 # DONE 
-- [x] Moved login into loginHandler.js
+- [x] Implement logout
+- [x] Move logout into logoutHandler.js
+- [x] Move login into loginHandler.js
 - [x] Implement login
 - [x] Move injectSession into injectSession.js
 - [x] Implement injectSession

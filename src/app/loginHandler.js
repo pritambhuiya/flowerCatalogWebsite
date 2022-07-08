@@ -17,7 +17,7 @@ const serveLoginPage = () => `<html>
 </body>
 </html>`;
 
-const createSession = ({ cookies }, sessions) => {
+const createSession = (cookies, sessions) => {
   const time = new Date();
   const sessionId = time.getTime();
   const session = { sessionId, time, username: cookies };

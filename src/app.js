@@ -7,6 +7,7 @@ const { loadGuestBook } = require('./app/loadGuestBook.js');
 const { injectCookies } = require('./app/injectCookies.js');
 const { injectSession } = require('./app/injectSession.js');
 const { loginHandler } = require('./app/loginHandler.js');
+const { logoutHandler } = require('./app/logoutHandler.js');
 
 const sessions = {};
 
@@ -15,6 +16,7 @@ const handlers = [
   injectSession(sessions),
   bodyParser,
   loginHandler(sessions),
+  logoutHandler(sessions),
   loadGuestBook,
   guestBook,
   serveFileContent,
