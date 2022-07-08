@@ -17,10 +17,10 @@ const getMimeType = (filePath) => {
   return extensions[extension] || 'text/plain';
 };
 
-const serveFileContent = (request, response, next) => {
+const serveFileContent = resourcePath => (request, response, next) => {
   const { url } = request;
   const filePath = isRoot(url) ? '/homepage.html' : url.pathname;
-  const resource = './public' + filePath;
+  const resource = resourcePath + filePath;
 
   try {
     const content = fs.readFileSync(resource);

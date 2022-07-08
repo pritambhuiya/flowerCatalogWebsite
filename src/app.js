@@ -21,7 +21,7 @@ const handlers = [
   signupHandler('.data/userDetails.json'),
   loadGuestBook,
   guestBook,
-  serveFileContent,
+  serveFileContent('./public'),
   notFoundHandler
 ];
 

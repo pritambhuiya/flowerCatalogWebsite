@@ -1,5 +1,6 @@
 # TODO
-- [ ] Implement closure for serveFileContent
+- [ ] Implement login feature before accessing guestBook
+- [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
 - [ ] Reorganized files 
 - [ ] Apply css properly
@@ -9,6 +10,8 @@
  - [ ] Guest Book
 
 # MAYBE
+- [ ] Consider removing guestBook.html 
+- [ ] Consider homepage.html to index.html
 - [ ] Refactor guestBook
 - [ ] Refactor signupHandler
 - [ ] Refactor loginHandler
@@ -16,6 +19,9 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Implement link of logout in guestBook
+- [x] Implement link of login, signup in homepage
+- [x] Implement closure for serveFileContent
 - [x] Implement signup handler
 - [x] Move signup into signupHandler.js
 - [x] Implement logout
