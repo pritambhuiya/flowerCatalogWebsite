@@ -1,4 +1,5 @@
 # TODO
+- [ ] Read all comments and replace (2nd approach)
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
@@ -10,6 +11,7 @@
  - [ ] Guest Book
 
 # MAYBE
+- [ ] Consider if comments or user details files are empty
 - [ ] Consider removing guestBook.html 
 - [ ] Consider homepage.html to index.html
 - [ ] Refactor guestBook
@@ -19,6 +21,8 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Reset formData
+- [x] Implement xhr while loading comments(1st approach only append latest comment)
 - [x] Implement link of logout in guestBook
 - [x] Implement link of login, signup in homepage
 - [x] Implement closure for serveFileContent

@@ -46,25 +46,22 @@ const addComment = ({ bodyParams, comments }, res) => {
 
   const latestComment = createComment(name, comment);
   storeComment(comments, latestComment);
-
-  res.statusCode = 302;
-  res.setHeader('Location', '/guestBook');
-  res.end();
+  res.end(JSON.stringify(latestComment));
 };
 
 const guestBook = (req, res, next) => {
   const { url, method } = req;
-  if (url.pathname === '/guestBook' && method === 'GET') {
+  if (url.pathname !== '/guestBook') {
+    next();
+    return;
+  }
+
+  if (method === 'GET') {
     serveGuestBook(req, res);
     return;
   }
 
-  if (url.pathname === '/add-comment' && method === 'POST') {
-    addComment(req, res);
-    return;
-  }
-
-  next();
+  addComment(req, res);
 };
 
 module.exports = { guestBook, getParams };
