@@ -37,6 +37,7 @@ const serveGuestBook = (req, res) => {
 
 const addComment = ({ bodyParams, comments }, res) => {
   const { name, comment } = getParams(bodyParams);
+
   if (!name || !comment) {
     res.statusCode = 400;
     res.setHeader('content-type', 'text/plain');
@@ -46,7 +47,7 @@ const addComment = ({ bodyParams, comments }, res) => {
 
   const latestComment = createComment(name, comment);
   storeComment(comments, latestComment);
-  res.end(JSON.stringify(latestComment));
+  res.end(JSON.stringify(comments));
 };
 
 const guestBook = (req, res, next) => {

@@ -1,15 +1,43 @@
-const formatComment = (response) => {
-  const { date, name, comment } = JSON.parse(response);
-  return `${date} ${name}: ${comment}`;
+const formatComment = ({ date, name, comment }) =>
+  `${date} ${name}: ${comment}`;
+
+const appendComment = (commentArea, comment) => {
+  const commentLine = document.createElement('p');
+  commentArea.appendChild(commentLine);
+
+  const formattedComment = formatComment(comment);
+  commentLine.innerText = formattedComment;
 };
 
-const addComment = ({ response }) => {
-  const commentElement = document.querySelector('#comments-area');
-  const commentLine = document.createElement('p');
-  commentElement.prepend(commentLine);
+const createCommentArea = () => {
+  const bodyElement = document.querySelector('body');
+  const commentArea = document.createElement('div');
+  bodyElement.appendChild(commentArea);
 
-  const formattedComment = formatComment(response);
-  commentLine.innerText = formattedComment;
+  commentArea.className = 'comment';
+  commentArea.id = 'comments-area';
+  return commentArea;
+};
+
+const hasErrorOccurred = (status) => status.toString().startsWith('4');
+
+const removeOldComments = () => {
+  const commentElement = document.querySelector('#comments-area');
+  commentElement.remove();
+};
+
+const addAllComments = ({ response, status }) => {
+  if (hasErrorOccurred(status)) {
+    return;
+  }
+  removeOldComments();
+
+  const commentArea = createCommentArea();
+  const comments = JSON.parse(response);
+
+  for (const aComment of comments) {
+    appendComment(commentArea, aComment);
+  }
 };
 
 const displayComment = () => {
@@ -18,16 +46,15 @@ const displayComment = () => {
   const formData = new FormData(form);
   const data = new URLSearchParams(formData);
 
-  xhr.onload = () => addComment(xhr);
+  xhr.onload = () => addAllComments(xhr);
   xhr.open('POST', '/guestBook');
   xhr.send(data);
   form.reset();
 };
 
 const add = () => {
-  const submitElement = document.getElementById("submit");
-  submitElement.addEventListener("click", displayComment);
+  const submitElement = document.getElementById('submit');
+  submitElement.addEventListener('click', displayComment);
 };
 
 window.onload = add;
-
