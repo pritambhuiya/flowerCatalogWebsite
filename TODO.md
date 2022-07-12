@@ -1,8 +1,9 @@
 # TODO
+- [ ] Reorganize files 
+- [ ] Implement form with multiple field having an input type file
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
-- [ ] Reorganize files 
 - [ ] Read all comments in server and client and write differences (3rd approach)
 - [ ] Apply css properly
  - [ ] Homepage
@@ -21,6 +22,7 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Implement file upload
 - [x] Read all comments and replace (2nd approach)
 - [x] Reset formData
 - [x] Implement xhr while loading comments(1st approach only append latest comment)
