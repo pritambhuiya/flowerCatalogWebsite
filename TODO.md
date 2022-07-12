@@ -1,6 +1,6 @@
 # TODO
-- [ ] Reorganize files 
 - [ ] Implement form with multiple field having an input type file
+- [ ] Implement multiple files
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
@@ -22,6 +22,7 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Reorganize files 
 - [x] Implement file upload
 - [x] Read all comments and replace (2nd approach)
 - [x] Reset formData
