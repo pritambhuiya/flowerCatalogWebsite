@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const formatComment = ({ date, name, comment }) =>
   `${date} ${name}: ${comment}`;
 

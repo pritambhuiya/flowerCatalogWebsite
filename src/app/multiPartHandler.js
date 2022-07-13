@@ -47,11 +47,7 @@ const parseBody = (content) => {
 };
 
 const multiPartHandler = (req, res, next) => {
-<<<<<<< HEAD
   if (req.url.pathname !== '/uploadFile') {
-=======
-  if (req.url.pathname !== '/readFile') {
->>>>>>> 682faa73800f2f18a497d9909592df8d74da701e
     next();
     return;
   }
