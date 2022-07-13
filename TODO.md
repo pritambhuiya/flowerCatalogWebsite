@@ -1,4 +1,6 @@
 # TODO
+- [ ] Implement multiPartHandler and xhrHandler
+- [ ] Test app
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
@@ -13,6 +15,7 @@
 # MAYBE
 - [ ] Consider if comments or user details files are empty
 - [ ] Consider removing guestBook.html 
+- [ ] Consider removing homepage.html
 - [ ] Consider homepage.html to index.html
 - [ ] Refactor guestBook
 - [ ] Refactor signupHandler
@@ -21,6 +24,10 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Reorganize directory structure
+ - [x] css 
+ - [x] frontEnd js 
+ - [x] template
 - [x] Read all comments and replace (2nd approach)
 - [x] Reset formData
 - [x] Implement xhr while loading comments(1st approach only append latest comment)

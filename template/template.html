@@ -3,14 +3,15 @@
 <head>
   <title>Guest Book</title>
   <link rel="stylesheet" href="css/guestBook.css" />
+  <script src="js/displayLatestComments.js"></script>
 </head>
 
 <body>
-  <h1><span><a href="homepage.html">&lt;&lt;</a>
-    </span>Guest Book</h1>
+  <h1><span><a href="homepage.html">&lt;&lt;</a></span>Guest Book</h1>
+  <a href="/logout">logout</a>
   <h2>Leave a comment</h2>
 
-  <form action="comment" method="post">
+  <form>
     <div class="name">
       <label for="name">Name:</label>
       <input type="text" name="name" id="name">
@@ -22,13 +23,11 @@
     </div>
 
     <div class="button">
-      <button id="submit">Submit</button>
-      <!-- <input type="submit" value="Submit"> -->
+      <button id="submit" type="button">Submit</button>
     </div>
   </form>
 
-  <div class="comment">
-  </div>
+  <div class="comment" id="comments-area">__COMMENTS__</div>
 </body>
 
 </html>
