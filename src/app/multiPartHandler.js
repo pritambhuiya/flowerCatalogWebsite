@@ -1,4 +1,3 @@
-const fs = require('fs');
 const CRLF = Buffer.from('\r\n');
 
 const filterArgs = (headerBodyPair) =>
@@ -46,25 +45,26 @@ const parseBody = (content) => {
   return { boundary, headers, fileContent };
 };
 
-const multiPartHandler = (req, res, next) => {
-  if (req.url.pathname !== '/uploadFile') {
-    next();
-    return;
-  }
+const multiPartHandler = (writeFileSync) =>
+  (req, res, next) => {
+    if (req.url.pathname !== '/uploadFile') {
+      next();
+      return;
+    }
 
-  const data = [];
-  req.on('data', (chunk) => {
-    data.push(chunk);
-  });
+    const data = [];
+    req.on('data', (chunk) => {
+      data.push(chunk);
+    });
 
-  req.on('end', () => {
-    req.formData = parseBody(Buffer.concat(data));
-    const { headers, fileContent } = req.formData;
-    const filePath = '.upload/' + headers.filename;
+    req.on('end', () => {
+      req.formData = parseBody(Buffer.concat(data));
+      const { headers, fileContent } = req.formData;
+      const filePath = '.upload/' + headers.filename;
 
-    fs.writeFileSync(filePath, fileContent);
-    res.end('Uploaded successfully');
-  });
-};
+      writeFileSync(filePath, fileContent);
+      res.end('Uploaded successfully');
+    });
+  };
 
 exports.multiPartHandler = multiPartHandler;

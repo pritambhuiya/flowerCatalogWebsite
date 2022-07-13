@@ -1,10 +1,9 @@
-const fs = require('fs');
+const loadGuestBook = ({ readFileSync }) =>
+  (request, response, next) => {
+    const existingComments = readFileSync('.data/comments.json', 'utf8');
+    request.comments = JSON.parse(existingComments);
+    request.template = readFileSync('template/template.html', 'utf8');
 
-const loadGuestBook = (request, response, next) => {
-  const existingComments = fs.readFileSync('.data/comments.json', 'utf8');
-  request.comments = JSON.parse(existingComments);
-  request.template = fs.readFileSync('template/template.html', 'utf8');
-
-  next();
-};
+    next();
+  };
 exports.loadGuestBook = loadGuestBook;

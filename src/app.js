@@ -12,23 +12,24 @@ const { signupHandler } = require('./app/signupHandler.js');
 const { multiPartHandler } = require('./app/multiPartHandler.js');
 const { xhrHandler } = require('./app/xhrHandler.js');
 
-const sessions = {};
+const requestHandler =
+  (sessions, fs, { resource, userDetails, commentsFile }) => {
+    const handlers = [
+      xhrHandler,
+      injectCookies,
+      injectSession(sessions),
+      multiPartHandler(fs.writeFileSync),
+      bodyParser,
+      loginHandler(sessions),
+      logoutHandler(sessions),
+      signupHandler(userDetails, fs),
+      loadGuestBook(fs),
+      guestBook(commentsFile, fs),
+      serveFileContent(resource, fs),
+      notFoundHandler
+    ];
 
-const handlers = [
-  xhrHandler,
-  injectCookies,
-  injectSession(sessions),
-  multiPartHandler,
-  bodyParser,
-  loginHandler(sessions),
-  logoutHandler(sessions),
-  signupHandler('.data/userDetails.json'),
-  loadGuestBook,
-  guestBook,
-  serveFileContent('./public'),
-  notFoundHandler
-];
-
-const requestHandler = createHandler(handlers);
+    return createHandler(handlers);
+  };
 
 module.exports = { requestHandler };

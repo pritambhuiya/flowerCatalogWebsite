@@ -1,4 +1,3 @@
-const fs = require('fs');
 const { getParams } = require('./guestBook.js');
 
 const serveSignupPage = () => `<html>
@@ -19,40 +18,42 @@ const serveSignupPage = () => `<html>
 </body>
 </html>`;
 
-const storeUserDetails = (userDetails, userDetailsFile) => {
-  userDetails.date = new Date().toLocaleString();
-  const register = JSON.parse(fs.readFileSync(userDetailsFile, 'utf8'));
+const storeUserDetails =
+  (userDetails, userDetailsFile, { readFileSync, writeFileSync }) => {
+    userDetails.date = new Date().toLocaleString();
+    const register = JSON.parse(readFileSync(userDetailsFile, 'utf8'));
 
-  register[userDetails.username] = userDetails;
-  fs.writeFileSync(userDetailsFile, JSON.stringify(register), 'utf8');
-};
+    register[userDetails.username] = userDetails;
+    writeFileSync(userDetailsFile, JSON.stringify(register), 'utf8');
+  };
 
-const signupHandler = register => ({ url, method, bodyParams }, res, next) => {
-  if (url.pathname !== '/signup') {
-    next();
-    return;
-  }
-
-  if (method === 'GET') {
-    res.setHeader('content-type', 'text/html');
-    res.end(serveSignupPage());
-    return;
-  }
-
-  if (method === 'POST') {
-    const userDetails = getParams(bodyParams);
-    const { name, username, password } = userDetails;
-    let location = '/signup';
-
-    if (name && username && password) {
-      storeUserDetails(userDetails, register);
-      location = '/';
+const signupHandler = (userDetailsFile, fs) =>
+  ({ url, method, bodyParams }, res, next) => {
+    if (url.pathname !== '/signup') {
+      next();
+      return;
     }
 
-    res.statusCode = 302;
-    res.setHeader('location', location);
-    res.end();
-  }
-};
+    if (method === 'GET') {
+      res.setHeader('content-type', 'text/html');
+      res.end(serveSignupPage());
+      return;
+    }
+
+    if (method === 'POST') {
+      const userDetails = getParams(bodyParams);
+      const { name, username, password } = userDetails;
+      let location = '/signup';
+
+      if (name && username && password) {
+        storeUserDetails(userDetails, userDetailsFile, fs);
+        location = '/';
+      }
+
+      res.statusCode = 302;
+      res.setHeader('location', location);
+      res.end();
+    }
+  };
 
 exports.signupHandler = signupHandler;

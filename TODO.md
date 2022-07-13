@@ -1,9 +1,12 @@
 # TODO
 - [ ] Test app
+- [ ] Don't upload if no file is chosen
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
 - [ ] Read all comments in server and client and write differences (3rd approach)
+- [ ] Upload multiple files 
+- [ ] Upload files with other fields
 - [ ] Apply css properly
  - [ ] Homepage
  - [ ] Abeliophyllum
@@ -22,12 +25,14 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Pass config, log, fs from outside
 - [x] Make a link from homepage to uploadFile
 - [x] Implement multiPartHandler and xhrHandler
 - [x] Reorganize directory structure
  - [x] css 
  - [x] frontEnd js 
  - [x] template
+ - [x] Upload file
 - [x] Read all comments and replace (2nd approach)
 - [x] Reset formData
 - [x] Implement xhr while loading comments(1st approach only append latest comment)

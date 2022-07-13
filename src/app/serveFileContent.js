@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 
 const isRoot = ({ pathname }) => pathname === '/';
@@ -17,20 +16,21 @@ const getMimeType = (filePath) => {
   return extensions[extension] || 'text/plain';
 };
 
-const serveFileContent = resourcePath => (request, response, next) => {
-  const { url } = request;
-  const filePath = isRoot(url) ? '/homepage.html' : url.pathname;
-  const resource = resourcePath + filePath;
+const serveFileContent = (resourcePath, { readFileSync }) =>
+  (request, response, next) => {
+    const { url } = request;
+    const filePath = isRoot(url) ? '/homepage.html' : url.pathname;
+    const resource = resourcePath + filePath;
 
-  try {
-    const content = fs.readFileSync(resource);
-    const mimeType = getMimeType(resource);
+    try {
+      const content = readFileSync(resource);
+      const mimeType = getMimeType(resource);
 
-    response.setHeader('Content-type', mimeType);
-    response.end(content);
-  } catch (error) {
-    next();
-  }
-};
+      response.setHeader('Content-type', mimeType);
+      response.end(content);
+    } catch (error) {
+      next();
+    }
+  };
 
 module.exports = { serveFileContent };
