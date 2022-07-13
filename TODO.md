@@ -1,9 +1,13 @@
 # TODO
+<<<<<<< HEAD
 - [ ] Test app
+=======
+- [ ] Implement form with multiple field having an input type file
+- [ ] Implement multiple files
+>>>>>>> 682faa73800f2f18a497d9909592df8d74da701e
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
-- [ ] Reorganize files 
 - [ ] Read all comments in server and client and write differences (3rd approach)
 - [ ] Apply css properly
  - [ ] Homepage
@@ -23,12 +27,17 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+<<<<<<< HEAD
 - [x] Make a link from homepage to uploadFile
 - [x] Implement multiPartHandler and xhrHandler
 - [x] Reorganize directory structure
  - [x] css 
  - [x] frontEnd js 
  - [x] template
+=======
+- [x] Reorganize files 
+- [x] Implement file upload
+>>>>>>> 682faa73800f2f18a497d9909592df8d74da701e
 - [x] Read all comments and replace (2nd approach)
 - [x] Reset formData
 - [x] Implement xhr while loading comments(1st approach only append latest comment)
