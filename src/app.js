@@ -9,12 +9,16 @@ const { injectSession } = require('./app/injectSession.js');
 const { loginHandler } = require('./app/loginHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
 const { signupHandler } = require('./app/signupHandler.js');
+const { multiPartHandler } = require('./app/multiPartHandler.js');
+const { xhrHandler } = require('./app/xhrHandler.js');
 
 const sessions = {};
 
 const handlers = [
+  xhrHandler,
   injectCookies,
   injectSession(sessions),
+  multiPartHandler,
   bodyParser,
   loginHandler(sessions),
   logoutHandler(sessions),

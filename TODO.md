@@ -1,5 +1,4 @@
 # TODO
-- [ ] Implement multiPartHandler and xhrHandler
 - [ ] Test app
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
@@ -24,6 +23,8 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Make a link from homepage to uploadFile
+- [x] Implement multiPartHandler and xhrHandler
 - [x] Reorganize directory structure
  - [x] css 
  - [x] frontEnd js 

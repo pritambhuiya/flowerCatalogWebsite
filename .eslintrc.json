@@ -72,7 +72,7 @@
       "off",
       4
     ],
-    "no-extra-parens": "error",
+    "no-extra-parens": "warn",
     "no-template-curly-in-string": "error",
     "array-callback-return": "error",
     "default-param-last": "error",

@@ -1,0 +1,22 @@
+<html>
+
+<head>
+  <title>Upload File</title>
+  <script src="js/uploadFile.js"></script>
+</head>
+
+<body>
+  <div id="name"></div>
+  <button onclick="createName()">Create name</button>
+
+  <form action="/uploadFile" method="post" enctype="multipart/form-data">
+    <div>
+      <input id="uploadFile" type="file" name="myFiles">
+      selected files: <span id="fileNum">0</span>;
+    </div>
+    <div><input type="submit" value="Submit"></div>
+  </form>
+
+</body>
+
+</html>
