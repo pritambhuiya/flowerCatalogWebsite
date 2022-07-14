@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getParams } = require('./guestBook.js');
+const { getParams } = require('./guestBookHandler.js');
 
 const serveSignupPage = () => `<html>
 <head>

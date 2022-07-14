@@ -22,9 +22,9 @@
 - [ ] Refactor signupHandler
 - [ ] Refactor loginHandler
 - [ ] Extract comment entity 
-- [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Extract guestBook entity 
 - [x] Consider injectUrl as handler
 - [x] Test app
   - [x] NotFoundHandler 

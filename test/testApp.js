@@ -9,7 +9,8 @@ describe('GET /', () => {
     const config = {
       resource: './public',
       commentsFile: '.data/comments.json',
-      userDetails: '.data/userDetails.json'
+      userDetails: '.data/userDetails.json',
+      guestBookTemplateFile: 'template/template.html'
     };
     app = createApp(config, sessions);
   });

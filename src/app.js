@@ -1,9 +1,8 @@
 const { serveFileContent } = require('./app/serveFileContent.js');
 const { notFoundHandler } = require('./app/notFoundHandler.js');
 const { createHandler } = require('./server/router.js');
-const { guestBook } = require('./app/guestBook.js');
 const { bodyParser } = require('./app/bodyParser.js');
-const { loadGuestBook } = require('./app/loadGuestBook.js');
+const { guestBookHandler } = require('./app/guestBookHandler.js');
 const { injectCookies } = require('./app/injectCookies.js');
 const { injectSession } = require('./app/injectSession.js');
 const { loginHandler } = require('./app/loginHandler.js');
@@ -23,8 +22,7 @@ const requestHandler = (
     loginHandler(sessions),
     logoutHandler(sessions),
     signupHandler(userDetails),
-    loadGuestBook(commentsFile, guestBookTemplateFile),
-    guestBook(commentsFile),
+    guestBookHandler(commentsFile, guestBookTemplateFile),
     serveFileContent(resource),
     notFoundHandler
   ];
