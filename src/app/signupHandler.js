@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { getParams } = require('./guestBook.js');
 
 const serveSignupPage = () => `<html>
@@ -19,15 +20,15 @@ const serveSignupPage = () => `<html>
 </html>`;
 
 const storeUserDetails =
-  (userDetails, userDetailsFile, { readFileSync, writeFileSync }) => {
+  (userDetails, userDetailsFile) => {
     userDetails.date = new Date().toLocaleString();
-    const register = JSON.parse(readFileSync(userDetailsFile, 'utf8'));
+    const register = JSON.parse(fs.readFileSync(userDetailsFile, 'utf8'));
 
     register[userDetails.username] = userDetails;
-    writeFileSync(userDetailsFile, JSON.stringify(register), 'utf8');
+    fs.writeFileSync(userDetailsFile, JSON.stringify(register), 'utf8');
   };
 
-const signupHandler = (userDetailsFile, fs) =>
+const signupHandler = (userDetailsFile) =>
   ({ url, method, bodyParams }, res, next) => {
     if (url.pathname !== '/signup') {
       next();
@@ -46,7 +47,7 @@ const signupHandler = (userDetailsFile, fs) =>
       let location = '/signup';
 
       if (name && username && password) {
-        storeUserDetails(userDetails, userDetailsFile, fs);
+        storeUserDetails(userDetails, userDetailsFile);
         location = '/';
       }
 

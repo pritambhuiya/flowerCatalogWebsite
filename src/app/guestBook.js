@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const formatComments = ({ comments }) => {
   let formattedComments = '';
 
@@ -16,9 +18,9 @@ const getParams = (rawParams) => {
 };
 
 const storeComment =
-  (comments, latestComment, commentsFile, { writeFileSync }) => {
+  (comments, latestComment, commentsFile) => {
     comments.unshift(latestComment);
-    writeFileSync(commentsFile, JSON.stringify(comments), 'utf8');
+    fs.writeFileSync(commentsFile, JSON.stringify(comments), 'utf8');
   };
 
 const createComment = (name, comment) => {
@@ -34,7 +36,7 @@ const serveGuestBook = (req, res) => {
   res.end(html);
 };
 
-const addComment = ({ bodyParams, comments }, res, commentsFile, fs) => {
+const addComment = ({ bodyParams, comments }, res, commentsFile) => {
   const { name, comment } = getParams(bodyParams);
 
   if (!name || !comment) {
@@ -45,11 +47,11 @@ const addComment = ({ bodyParams, comments }, res, commentsFile, fs) => {
   }
 
   const latestComment = createComment(name, comment);
-  storeComment(comments, latestComment, commentsFile, fs);
+  storeComment(comments, latestComment, commentsFile);
   res.end(JSON.stringify(comments));
 };
 
-const guestBook = (commentsFile, fs) => (req, res, next) => {
+const guestBook = (commentsFile) => (req, res, next) => {
   const { url, method } = req;
   if (url.pathname !== '/guestBook') {
     next();
@@ -61,7 +63,7 @@ const guestBook = (commentsFile, fs) => (req, res, next) => {
     return;
   }
 
-  addComment(req, res, commentsFile, fs);
+  addComment(req, res, commentsFile);
 };
 
 module.exports = { guestBook, getParams };

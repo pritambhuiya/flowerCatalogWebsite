@@ -1,5 +1,5 @@
 # TODO
-- [ ] Test app
+- [ ] Say bad request if name or password is not given in login page
 - [ ] Don't upload if no file is chosen
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
@@ -25,6 +25,16 @@
 - [ ] Extract guestBook entity 
 
 # DONE 
+- [x] Consider injectUrl as handler
+- [x] Test app
+  - [x] NotFoundHandler 
+  - [x] serveFileContent 
+  - [x] /guestBook 
+  - [x] /signUp 
+  - [x] /logout 
+  - [x] /login 
+- [x] Install mocha
+- [x] Install supertest
 - [x] Pass config, log, fs from outside
 - [x] Make a link from homepage to uploadFile
 - [x] Implement multiPartHandler and xhrHandler

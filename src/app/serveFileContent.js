@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 const isRoot = ({ pathname }) => pathname === '/';
 
@@ -16,14 +17,14 @@ const getMimeType = (filePath) => {
   return extensions[extension] || 'text/plain';
 };
 
-const serveFileContent = (resourcePath, { readFileSync }) =>
+const serveFileContent = (resourcePath) =>
   (request, response, next) => {
     const { url } = request;
     const filePath = isRoot(url) ? '/homepage.html' : url.pathname;
     const resource = resourcePath + filePath;
 
     try {
-      const content = readFileSync(resource);
+      const content = fs.readFileSync(resource);
       const mimeType = getMimeType(resource);
 
       response.setHeader('Content-type', mimeType);

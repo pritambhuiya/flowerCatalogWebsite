@@ -10,26 +10,26 @@ const { loginHandler } = require('./app/loginHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
 const { signupHandler } = require('./app/signupHandler.js');
 const { multiPartHandler } = require('./app/multiPartHandler.js');
-const { xhrHandler } = require('./app/xhrHandler.js');
+const { injectUrl } = require('./app/injectUrl.js');
 
-const requestHandler =
-  (sessions, fs, { resource, userDetails, commentsFile }) => {
-    const handlers = [
-      xhrHandler,
-      injectCookies,
-      injectSession(sessions),
-      multiPartHandler(fs.writeFileSync),
-      bodyParser,
-      loginHandler(sessions),
-      logoutHandler(sessions),
-      signupHandler(userDetails, fs),
-      loadGuestBook(fs),
-      guestBook(commentsFile, fs),
-      serveFileContent(resource, fs),
-      notFoundHandler
-    ];
+const requestHandler = (
+  { resource, userDetails, commentsFile, guestBookTemplateFile }, sessions) => {
+  const handlers = [
+    injectUrl,
+    injectCookies,
+    injectSession(sessions),
+    multiPartHandler,
+    bodyParser,
+    loginHandler(sessions),
+    logoutHandler(sessions),
+    signupHandler(userDetails),
+    loadGuestBook(commentsFile, guestBookTemplateFile),
+    guestBook(commentsFile),
+    serveFileContent(resource),
+    notFoundHandler
+  ];
 
-    return createHandler(handlers);
-  };
+  return createHandler(handlers);
+};
 
 module.exports = { requestHandler };

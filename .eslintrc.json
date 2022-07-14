@@ -48,7 +48,7 @@
     "handle-callback-err": "error",
     "id-length": "error",
     "key-spacing": "error",
-    "max-len": "warn",
+    "max-len": "off",
     "max-params": [
       "error",
       {
@@ -100,7 +100,7 @@
         "test*.js"
       ],
       "rules": {
-        "max-len": "warn",
+        "max-len": "off",
         "no-magic-numbers": "off",
         "max-statements": "off"
       }
