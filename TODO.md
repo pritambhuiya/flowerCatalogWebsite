@@ -1,9 +1,10 @@
 # TODO
-- [ ] Don't upload if no file is chosen
+- [ ] Replace handlers 
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
 - [ ] Read all comments in server and client and write differences (3rd approach)
+- [ ] Don't upload if no file is chosen
 - [ ] Upload multiple files 
 - [ ] Upload files with other fields
 - [ ] Apply css properly
@@ -16,13 +17,18 @@
 - [ ] Consider if comments or user details files are empty
 - [ ] Consider removing guestBook.html 
 - [ ] Consider removing homepage.html
-- [ ] Consider homepage.html to index.html
 - [ ] Refactor guestBook
 - [ ] Refactor signupHandler
 - [ ] Refactor loginHandler
 - [ ] Extract comment entity 
 
 # DONE 
+- [x] Consider renaming homepage.css to index.css
+- [x] Consider renaming homepage.html to index.html
+- [x] Implement serveStaticContent
+- [x] Use logger as middleWare
+- [x] Replace server using express
+- [x] Verify express exists
 - [x] Separate testData
 - [x] Redirect to login page if name or password is not given in login page
 - [x] Extract guestBook entity 

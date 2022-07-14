@@ -8,8 +8,15 @@ const config = {
   guestBookTemplateFile: 'template/template.html'
 };
 
-const sessions = {};
-const PORT = 8000;
+const logger = ({ method, url }, res, next) => {
+  console.log(method, url);
+  next();
+};
 
-const app = requestHandler(config, sessions);
-createServer(PORT, app);
+const PORT = 8000;
+const express = require('express');
+const app = express();
+app.listen(PORT, console.log('Started listening on 8000'));
+
+app.use(logger);
+app.use(express.static('public'));

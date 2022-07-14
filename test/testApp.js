@@ -26,12 +26,11 @@ describe('GET /', () => {
   });
 
   describe('serveFileContent', () => {
-    it('Should serve homepage.html if resource is /', (done) => {
+    it('Should serve index.html if resource is /', (done) => {
       request(app)
         .get('/')
         .expect(/Flower Catalog/)
         .expect('content-type', /html/)
-        .expect('content-length', '860')
         .expect(200, done);
     });
 
@@ -40,7 +39,6 @@ describe('GET /', () => {
         .get('/ageratum.html')
         .expect(/Ageratum/)
         .expect('content-type', /html/)
-        .expect('content-length', '1045')
         .expect(200, done);
     });
   });
@@ -82,7 +80,7 @@ describe('GET /', () => {
           .expect(200, done);
       });
 
-    it('Should redirect to homepage if method is POST and name, username and password are given',
+    it('Should redirect to index if method is POST and name, username and password are given',
       (done) => {
         request(app)
           .post('/signup')
@@ -101,7 +99,7 @@ describe('GET /', () => {
   });
 
   describe('/logout', () => {
-    it('Should redirect to homepage page if method is GET and session is not present',
+    it('Should redirect to index page if method is GET and session is not present',
       (done) => {
         request(app)
           .get('/logout')
@@ -109,7 +107,7 @@ describe('GET /', () => {
           .expect(302, done);
       });
 
-    it('Should redirect to homepage page and delete session if method is GET and session is present',
+    it('Should redirect to index page and delete session if method is GET and session is present',
       (done) => {
         request(app)
           .get('/logout')

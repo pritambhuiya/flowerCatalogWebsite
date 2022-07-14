@@ -20,7 +20,7 @@ const getMimeType = (filePath) => {
 const serveFileContent = (resourcePath) =>
   (request, response, next) => {
     const { url } = request;
-    const filePath = isRoot(url) ? '/homepage.html' : url.pathname;
+    const filePath = isRoot(url) ? '/index.html' : url.pathname;
     const resource = resourcePath + filePath;
 
     try {
