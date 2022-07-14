@@ -8,8 +8,8 @@ describe('GET /', () => {
     const sessions = {};
     const config = {
       resource: './public',
-      commentsFile: '.data/comments.json',
-      userDetails: '.data/userDetails.json',
+      commentsFile: 'test/testData/comments.json',
+      userDetails: 'test/testData/userDetails.json',
       guestBookTemplateFile: 'template/template.html'
     };
     app = createApp(config, sessions);

@@ -1,3 +1,5 @@
+const { getParams } = require('./guestBookHandler.js');
+
 const serveLoginPage = () => `<html>
 <head>
   <title>Login</title>
@@ -24,7 +26,7 @@ const createSession = (cookies, sessions) => {
 };
 
 const loginHandler = sessions =>
-  ({ url, method, session, cookies }, res, next) => {
+  ({ url, method, session, cookies, bodyParams }, res, next) => {
 
     if (url.pathname !== '/login') {
       next();
@@ -37,13 +39,20 @@ const loginHandler = sessions =>
       return;
     }
 
+    let location = '/login';
     if (!session && method === 'POST') {
-      const session = createSession(cookies, sessions);
-      res.setHeader('Set-Cookie', `sessionId=${session.sessionId}`);
+      const userDetails = getParams(bodyParams);
+      const { username, password } = userDetails;
+
+      if (username && password) {
+        const session = createSession(cookies, sessions);
+        res.setHeader('Set-Cookie', `sessionId=${session.sessionId}`);
+        location = '/guestBook';
+      }
     }
 
     res.statusCode = 302;
-    res.setHeader('location', '/guestBook');
+    res.setHeader('location', location);
     res.end();
   };
 

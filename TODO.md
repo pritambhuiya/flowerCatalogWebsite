@@ -1,5 +1,4 @@
 # TODO
-- [ ] Say bad request if name or password is not given in login page
 - [ ] Don't upload if no file is chosen
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
@@ -24,6 +23,8 @@
 - [ ] Extract comment entity 
 
 # DONE 
+- [x] Separate testData
+- [x] Redirect to login page if name or password is not given in login page
 - [x] Extract guestBook entity 
 - [x] Consider injectUrl as handler
 - [x] Test app
