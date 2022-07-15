@@ -1,5 +1,4 @@
 # TODO
-- [ ] Replace handlers 
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
 - [ ] Implement apiHandler
@@ -23,6 +22,7 @@
 - [ ] Extract comment entity 
 
 # DONE 
+- [x] Replace handlers 
 - [x] Consider renaming homepage.css to index.css
 - [x] Consider renaming homepage.html to index.html
 - [x] Implement serveStaticContent

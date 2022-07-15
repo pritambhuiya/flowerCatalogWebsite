@@ -1,6 +1,3 @@
-const { serveFileContent } = require('./app/serveFileContent.js');
-const { notFoundHandler } = require('./app/notFoundHandler.js');
-const { createHandler } = require('./server/router.js');
 const { bodyParser } = require('./app/bodyParser.js');
 const { guestBookHandler } = require('./app/guestBookHandler.js');
 const { injectCookies } = require('./app/injectCookies.js');
@@ -9,25 +6,37 @@ const { loginHandler } = require('./app/loginHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
 const { signupHandler } = require('./app/signupHandler.js');
 const { multiPartHandler } = require('./app/multiPartHandler.js');
-const { injectUrl } = require('./app/injectUrl.js');
 
-const requestHandler = (
-  { resource, userDetails, commentsFile, guestBookTemplateFile }, sessions) => {
-  const handlers = [
-    injectUrl,
-    injectCookies,
-    injectSession(sessions),
-    multiPartHandler,
-    bodyParser,
-    loginHandler(sessions),
-    logoutHandler(sessions),
-    signupHandler(userDetails),
-    guestBookHandler(commentsFile, guestBookTemplateFile),
-    serveFileContent(resource),
-    notFoundHandler
-  ];
-
-  return createHandler(handlers);
+const logger = ({ method, url }, res, next) => {
+  console.log(method, url);
+  next();
 };
 
-module.exports = { requestHandler };
+const express = require('express');
+
+const createApp = ({ resource, userDetails, commentsFile, guestBookTemplateFile }, sessions) => {
+  const app = express();
+
+  app.use(logger);
+  app.use(express.static(resource));
+  app.get('/ab', (req, res) => res.end('hi'));
+
+  app.use(injectCookies);
+  app.use(injectSession(sessions));
+  app.use(bodyParser);
+
+  app.get('/guestBook', guestBookHandler(commentsFile, guestBookTemplateFile));
+  app.post('/guestBook', guestBookHandler(commentsFile, guestBookTemplateFile));
+
+  app.get('/signup', signupHandler(userDetails));
+  app.post('/signup', signupHandler(userDetails));
+
+  app.get('/login', loginHandler(sessions));
+  app.post('/login', loginHandler(sessions));
+
+  app.get('/logout', logoutHandler(sessions));
+  app.post('/logout', logoutHandler(sessions));
+  return app;
+};
+
+module.exports = { createApp };

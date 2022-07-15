@@ -19,14 +19,13 @@ const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
 
   return (req, res, next) => {
     const { url, method, bodyParams } = req;
-    if (url.pathname !== '/guestBook') {
+    if (url !== '/guestBook') {
       next();
       return;
     }
 
     if (method === 'GET') {
       const html = flowerGuestBook.serveGuestBook();
-      res.setHeader('Content-type', 'text/html');
       res.end(html);
       return;
     }
@@ -34,8 +33,7 @@ const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
     const { name, comment } = getParams(bodyParams);
 
     if (!name || !comment) {
-      res.statusCode = 400;
-      res.setHeader('content-type', 'text/plain');
+      res.status(400);
       res.end('Need to provide name and comment');
       return;
     }

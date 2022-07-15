@@ -30,13 +30,13 @@ const storeUserDetails =
 
 const signupHandler = (userDetailsFile) =>
   ({ url, method, bodyParams }, res, next) => {
-    if (url.pathname !== '/signup') {
+    if (url !== '/signup') {
       next();
       return;
     }
 
     if (method === 'GET') {
-      res.setHeader('content-type', 'text/html');
+      res.set('content-type', 'text/html');
       res.end(serveSignupPage());
       return;
     }
@@ -51,8 +51,7 @@ const signupHandler = (userDetailsFile) =>
         location = '/';
       }
 
-      res.statusCode = 302;
-      res.setHeader('location', location);
+      res.status(302).location(location);
       res.end();
     }
   };

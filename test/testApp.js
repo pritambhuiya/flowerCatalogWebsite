@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const { requestHandler: createApp } = require('../src/app.js');
+const { createApp } = require('../src/app.js');
 
 describe('GET /', () => {
   let app;
@@ -19,8 +19,7 @@ describe('GET /', () => {
     it('Should say 404 not found if resource is /unknown', (done) => {
       request(app)
         .get('/unknown')
-        .expect('content-type', /plain/)
-        .expect('content-length', '9')
+        .expect('content-type', /html/)
         .expect(404, done);
     });
   });
@@ -49,7 +48,6 @@ describe('GET /', () => {
         request(app)
           .get('/guestBook')
           .expect(/guestBook/)
-          .expect('content-type', /html/)
           .expect(200, done);
       });
 
@@ -112,7 +110,7 @@ describe('GET /', () => {
         request(app)
           .get('/logout')
           .set('cookie', 'sessionId=1234')
-          .expect('set-cookie', 'sessionId=0;Max-Age=0')
+          .expect('set-cookie', 'sessionId=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT')
           .expect('location', '/')
           .expect(302, done);
       });
@@ -123,8 +121,6 @@ describe('GET /', () => {
       (done) => {
         request(app)
           .get('/login')
-          .expect('content-type', /html/)
-          .expect('content-length', '383')
           .expect(/login/)
           .expect(200, done);
       });
@@ -145,6 +141,16 @@ describe('GET /', () => {
           .set('cookie', 'sessionId=1234')
           .send('username=sai&password=1234')
           .expect('location', '/guestBook')
+          .expect(302, done);
+      });
+
+    it('Should redirect to login if method is POST and session is present and username or password is not present',
+      (done) => {
+        request(app)
+          .post('/login')
+          .set('cookie', 'sessionId=1234')
+          .send('')
+          .expect('location', '/login')
           .expect(302, done);
       });
   });

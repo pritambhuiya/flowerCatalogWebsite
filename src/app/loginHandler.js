@@ -28,13 +28,12 @@ const createSession = (cookies, sessions) => {
 const loginHandler = sessions =>
   ({ url, method, session, cookies, bodyParams }, res, next) => {
 
-    if (url.pathname !== '/login') {
+    if (url !== '/login') {
       next();
       return;
     }
 
     if (!session && method === 'GET') {
-      res.setHeader('content-type', 'text/html');
       res.end(serveLoginPage());
       return;
     }
@@ -46,13 +45,12 @@ const loginHandler = sessions =>
 
       if (username && password) {
         const session = createSession(cookies, sessions);
-        res.setHeader('Set-Cookie', `sessionId=${session.sessionId}`);
+        res.cookie('sessionId', session.sessionId);
         location = '/guestBook';
       }
     }
 
-    res.statusCode = 302;
-    res.setHeader('location', location);
+    res.redirect(302, location);
     res.end();
   };
 

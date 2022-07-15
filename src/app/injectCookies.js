@@ -9,6 +9,7 @@ const parseCookie = (cookie) => {
 
   return cookies;
 };
+
 const injectCookies = (req, res, next) => {
   const { cookie } = req.headers;
   if (cookie) {
@@ -18,4 +19,5 @@ const injectCookies = (req, res, next) => {
 
   next();
 };
+
 exports.injectCookies = injectCookies;

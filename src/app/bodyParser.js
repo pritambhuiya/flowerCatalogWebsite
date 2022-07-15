@@ -6,9 +6,11 @@ const bodyParser = (request, response, next) => {
 
   let data = '';
   request.on('data', (chunk) => data += chunk);
+
   request.on('end', () => {
     request.bodyParams = new URLSearchParams(data);
     next();
   });
 };
+
 exports.bodyParser = bodyParser;
