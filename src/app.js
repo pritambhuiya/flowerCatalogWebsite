@@ -4,7 +4,7 @@ const { injectSession } = require('./app/injectSession.js');
 const { loginHandler, serveLoginPage } = require('./app/loginHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
 const { signupHandler, serveSignupPage } = require('./app/signupHandler.js');
-// const { multiPartHandler } = require('./app/multiPartHandler.js');
+const { multiPartHandler, serveUploadFile } = require('./app/multiPartHandler.js');
 
 const logger = ({ method, url }, res, next) => {
   console.log(method, url);
@@ -24,6 +24,7 @@ const createApp = (config, sessions, guestBook) => {
   const loginRouter = express.Router();
   const signupRouter = express.Router();
   const guestBookRouter = express.Router();
+  const uploadFileRouter = express.Router();
 
   app.use(logger);
   app.use(express.urlencoded({ extended: true }));
@@ -33,8 +34,8 @@ const createApp = (config, sessions, guestBook) => {
   app.use(injectSession(sessions));
 
   app.use('/login', loginRouter);
-  loginRouter.get('', serveLoginPage);
-  loginRouter.post('', loginHandler(sessions));
+  loginRouter.get('/', serveLoginPage);
+  loginRouter.post('/', loginHandler(sessions));
 
   app.use('/signup', signupRouter);
   signupRouter.get('/', serveSignupPage);
@@ -45,6 +46,10 @@ const createApp = (config, sessions, guestBook) => {
   app.use('/guestBook', guestBookRouter);
   guestBookRouter.get('/', serveGuestBook(guestBook));
   guestBookRouter.post('/', addComments(guestBook));
+
+  app.use('/uploadFile', uploadFileRouter);
+  uploadFileRouter.get('/', serveUploadFile);
+  uploadFileRouter.post('/', multiPartHandler);
 
   app.get('/api/comments', comments(guestBook));
   return app;

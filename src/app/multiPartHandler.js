@@ -46,16 +46,9 @@ const parseBody = (content) => {
   return { boundary, headers, fileContent };
 };
 
-const multiPartHandler = (req, res, next) => {
-  if (req.url.pathname !== '/uploadFile') {
-    next();
-    return;
-  }
-
+const multiPartHandler = (req, res) => {
   const data = [];
-  req.on('data', (chunk) => {
-    data.push(chunk);
-  });
+  req.on('data', chunk => data.push(chunk));
 
   req.on('end', () => {
     req.formData = parseBody(Buffer.concat(data));
@@ -67,4 +60,26 @@ const multiPartHandler = (req, res, next) => {
   });
 };
 
-exports.multiPartHandler = multiPartHandler;
+const uploadFile = `<html>
+<head>
+  <title>Upload File</title>
+  <script src="js/uploadFile.js"></script>
+</head>
+<body>
+  <div id="name"></div>
+  <form action="/uploadFile" method="post" enctype="multipart/form-data">
+    <div>
+      <input id="uploadFile" type="file" name="myFiles">
+      selected files: <span id="fileNum">0</span>;
+    </div>
+    <div><input type="submit" value="Submit"></div>
+  </form>
+</body>
+</html>`;
+
+const serveUploadFile = (req, res) => {
+  res.end(uploadFile);
+  return 0;
+};
+
+module.exports = { multiPartHandler, serveUploadFile };

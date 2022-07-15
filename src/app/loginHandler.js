@@ -41,6 +41,7 @@ const loginHandler = sessions =>
 
       if (username && password) {
         const session = createSession(cookies, sessions);
+        // console.log(session);
         res.cookie('sessionId', session.sessionId);
         location = '/guestBook';
       }

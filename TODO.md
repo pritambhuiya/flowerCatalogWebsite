@@ -12,6 +12,7 @@
  - [ ] Guest Book
 
 # MAYBE
+- [ ] Consider pulling creation of app in before in test 
 - [ ] Consider if comments or user details files are empty
 - [ ] Consider removing guestBook.html 
 - [ ] Consider removing homepage.html
@@ -21,7 +22,9 @@
 - [ ] Extract comment entity 
 
 # DONE 
+- [x] Test for login if session is already present 
 - [x] Implement router
+- [x] Extracted serveUploadFile function
 - [x] Extracted serveLoginPage function
 - [x] Extracted serveSignUp function
 - [x] Extracted addComments function

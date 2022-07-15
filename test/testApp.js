@@ -122,7 +122,7 @@ describe('Testing app', () => {
   });
 
   describe('/login', () => {
-    it('Should serve login page if method is GET and session is present',
+    it('Should serve login page if method is GET and session is not present',
       (done) => {
         request(app)
           .get('/login')
@@ -130,17 +130,36 @@ describe('Testing app', () => {
           .expect(200, done);
       });
 
-    it('Should redirect to guestBook if method is POST and session is present',
+    it('Should redirect to guestBook page if method is GET and session is present',
       (done) => {
+        const sessions = {
+          '1234': {
+            sessionId: 1234,
+            time: '2022-07-15T12:03:56.460Z',
+            username: undefined
+          }
+        };
+
+        const config = {
+          resource: './public',
+          commentsFile: 'test/testData/comments.json',
+          userDetails: 'test/testData/userDetails.json',
+          guestBookTemplateFile: 'template/template.html'
+        };
+
+        const guestBook = new GuestBook(config.commentsFile, config.guestBookTemplateFile);
+
+        guestBook.loadComments();
+        app = createApp(config, sessions, guestBook);
+
         request(app)
-          .post('/login')
+          .get('/login')
           .set('cookie', 'sessionId=1234')
-          .send('username=sai&password=1234')
           .expect('location', '/guestBook')
           .expect(302, done);
       });
 
-    it('Should redirect to guestBook page if method is POST and session is not present',
+    it('Should redirect to guestBook page if method is POST and session is not present and username or password is present',
       (done) => {
         request(app)
           .post('/login')
@@ -158,5 +177,20 @@ describe('Testing app', () => {
           .expect('location', '/login')
           .expect(302, done);
       });
+  });
+
+  describe('/uploadFile', () => {
+    it('Should say uploaded successfully resource is /uploadFile', (done) => {
+      request(app)
+        .get('/uploadFile')
+        .expect(200, done);
+    });
+
+    it('Should say uploaded successfully resource is /uploadFile', (done) => {
+      request(app)
+        .post('/uploadFile')
+        .send()
+        .expect(200, done);
+    });
   });
 });
