@@ -1,10 +1,10 @@
-const { guestBookHandler } = require('./app/guestBookHandler.js');
+const { addComments, serveGuestBook } = require('./app/guestBookHandler.js');
 const { injectCookies } = require('./app/injectCookies.js');
 const { injectSession } = require('./app/injectSession.js');
 const { loginHandler } = require('./app/loginHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
 const { signupHandler } = require('./app/signupHandler.js');
-const { multiPartHandler } = require('./app/multiPartHandler.js');
+// const { multiPartHandler } = require('./app/multiPartHandler.js');
 
 const logger = ({ method, url }, res, next) => {
   console.log(method, url);
@@ -13,7 +13,8 @@ const logger = ({ method, url }, res, next) => {
 
 const express = require('express');
 
-const createApp = ({ resource, userDetails, commentsFile, guestBookTemplateFile }, sessions) => {
+const createApp = (config, sessions, guestBook) => {
+  const { resource, userDetails } = config;
   const app = express();
 
   app.use(logger);
@@ -23,8 +24,9 @@ const createApp = ({ resource, userDetails, commentsFile, guestBookTemplateFile 
   app.use(injectCookies);
   app.use(injectSession(sessions));
 
-  app.get('/guestBook', guestBookHandler(commentsFile, guestBookTemplateFile));
-  app.post('/guestBook', guestBookHandler(commentsFile, guestBookTemplateFile));
+  app.get('/guestBook', serveGuestBook(guestBook));
+  app.post('/guestBook', addComments(guestBook));
+  app.get('/api/comments', comments(guestBook));
 
   app.get('/signup', signupHandler(userDetails));
   app.post('/signup', signupHandler(userDetails));
@@ -35,6 +37,10 @@ const createApp = ({ resource, userDetails, commentsFile, guestBookTemplateFile 
   app.get('/logout', logoutHandler(sessions));
   app.post('/logout', logoutHandler(sessions));
   return app;
+};
+
+const comments = (guestBook) => (req, res) => {
+  res.end(guestBook.comments);
 };
 
 module.exports = { createApp };

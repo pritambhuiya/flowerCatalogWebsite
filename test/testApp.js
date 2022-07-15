@@ -1,6 +1,7 @@
 const request = require('supertest');
 
 const { createApp } = require('../src/app.js');
+const { GuestBook } = require('../src/app/guestBook.js');
 
 describe('Testing app', () => {
   let app;
@@ -12,7 +13,11 @@ describe('Testing app', () => {
       userDetails: 'test/testData/userDetails.json',
       guestBookTemplateFile: 'template/template.html'
     };
-    app = createApp(config, sessions);
+
+    const guestBook = new GuestBook(config.commentsFile, config.guestBookTemplateFile);
+
+    guestBook.loadComments();
+    app = createApp(config, sessions, guestBook);
   });
 
   describe('Not found handler', () => {

@@ -36,7 +36,7 @@ class GuestBook {
     return this.#template.replace('__COMMENTS__', formattedComments);
   }
 
-  getComments() {
+  get comments() {
     return JSON.stringify(this.#comments);
   }
 }

@@ -1,7 +1,6 @@
 # TODO
 - [ ] Implement login feature before accessing guestBook
 - [ ] Implement signup feature if username and password doesn't match with database
-- [ ] Implement apiHandler
 - [ ] Read all comments in server and client and write differences (3rd approach)
 - [ ] Don't upload if no file is chosen
 - [ ] Upload multiple files 
@@ -22,6 +21,9 @@
 - [ ] Extract comment entity 
 
 # DONE 
+- [x] Extracted addComments function
+- [x] Extracted serveGuestBook function
+- [x] Implement apiHandler for comments
 - [x] Remove server.js, router.js, bodyParser.js, serveStaticFile.js, notFoundHandler.js
 - [x] Replace bodyParser using use express.urlEncoded
 - [x] Replace handlers 

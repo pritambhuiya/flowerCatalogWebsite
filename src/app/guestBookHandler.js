@@ -1,24 +1,16 @@
-const { GuestBook } = require('./guestBook.js');
-
 const createComment = (name, comment) => {
   const date = new Date().toLocaleString();
   return { name, comment, date };
 };
 
-const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
-  const flowerGuestBook = new GuestBook(commentsFile, guestBookTemplateFile);
-  flowerGuestBook.loadComments();
+const serveGuestBook = (guestBook) => (req, res) => {
+  const html = guestBook.serveGuestBook();
+  res.end(html);
+};
 
+const addComments = (guestBook) => {
   return (req, res) => {
-    const { method, body } = req;
-
-    if (method === 'GET') {
-      const html = flowerGuestBook.serveGuestBook();
-      res.end(html);
-      return;
-    }
-
-    const { name, comment } = body;
+    const { name, comment } = req.body;
 
     if (!name || !comment) {
       res.status(400);
@@ -27,9 +19,9 @@ const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
     }
 
     const latestComment = createComment(name, comment);
-    flowerGuestBook.storeComment(latestComment);
-    res.end(flowerGuestBook.getComments());
+    guestBook.storeComment(latestComment);
+    res.end(guestBook.comments);
   };
 };
 
-module.exports = { guestBookHandler };
+module.exports = { addComments, serveGuestBook };
