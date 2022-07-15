@@ -3,7 +3,7 @@ const { injectCookies } = require('./app/injectCookies.js');
 const { injectSession } = require('./app/injectSession.js');
 const { loginHandler } = require('./app/loginHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
-const { signupHandler } = require('./app/signupHandler.js');
+const { signupHandler, serveSignUpPage } = require('./app/signupHandler.js');
 // const { multiPartHandler } = require('./app/multiPartHandler.js');
 
 const logger = ({ method, url }, res, next) => {
@@ -28,7 +28,7 @@ const createApp = (config, sessions, guestBook) => {
   app.post('/guestBook', addComments(guestBook));
   app.get('/api/comments', comments(guestBook));
 
-  app.get('/signup', signupHandler(userDetails));
+  app.get('/signup', serveSignUpPage);
   app.post('/signup', signupHandler(userDetails));
 
   app.get('/login', loginHandler(sessions));

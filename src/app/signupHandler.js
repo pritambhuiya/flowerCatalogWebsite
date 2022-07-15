@@ -27,26 +27,23 @@ const storeUserDetails =
     fs.writeFileSync(userDetailsFile, JSON.stringify(register), 'utf8');
   };
 
+const serveSignUpPage = (req, res) => {
+  res.set('content-type', 'text/html');
+  res.end(serveSignupPage());
+};
+
 const signupHandler = (userDetailsFile) =>
-  ({ method, body }, res) => {
-    if (method === 'GET') {
-      res.set('content-type', 'text/html');
-      res.end(serveSignupPage());
-      return;
+  ({ body }, res) => {
+    const { name, username, password } = body;
+    let location = '/signup';
+
+    if (name && username && password) {
+      storeUserDetails(body, userDetailsFile);
+      location = '/';
     }
 
-    if (method === 'POST') {
-      const { name, username, password } = body;
-      let location = '/signup';
-
-      if (name && username && password) {
-        storeUserDetails(body, userDetailsFile);
-        location = '/';
-      }
-
-      res.status(302).location(location);
-      res.end();
-    }
+    res.status(302).location(location);
+    res.end();
   };
 
-exports.signupHandler = signupHandler;
+module.exports = { signupHandler, serveSignUpPage };
