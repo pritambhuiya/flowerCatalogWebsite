@@ -1,4 +1,3 @@
-const { bodyParser } = require('./app/bodyParser.js');
 const { guestBookHandler } = require('./app/guestBookHandler.js');
 const { injectCookies } = require('./app/injectCookies.js');
 const { injectSession } = require('./app/injectSession.js');
@@ -18,11 +17,11 @@ const createApp = ({ resource, userDetails, commentsFile, guestBookTemplateFile 
   const app = express();
 
   app.use(logger);
+  app.use(express.urlencoded({ extended: true }));
   app.use(express.static(resource));
 
   app.use(injectCookies);
   app.use(injectSession(sessions));
-  app.use(bodyParser);
 
   app.get('/guestBook', guestBookHandler(commentsFile, guestBookTemplateFile));
   app.post('/guestBook', guestBookHandler(commentsFile, guestBookTemplateFile));

@@ -1,5 +1,3 @@
-const { getParams } = require('./guestBookHandler.js');
-
 const serveLoginPage = () => `<html>
 <head>
   <title>Login</title>
@@ -26,7 +24,7 @@ const createSession = (cookies, sessions) => {
 };
 
 const loginHandler = sessions =>
-  ({ method, session, cookies, bodyParams }, res) => {
+  ({ method, session, cookies, body }, res) => {
 
     if (!session && method === 'GET') {
       res.end(serveLoginPage());
@@ -35,7 +33,7 @@ const loginHandler = sessions =>
 
     let location = '/guestBook';
     if (!session && method === 'POST') {
-      const { username, password } = getParams(bodyParams);
+      const { username, password } = body;
 
       if (username && password) {
         const session = createSession(cookies, sessions);

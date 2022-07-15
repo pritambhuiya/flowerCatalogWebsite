@@ -1,13 +1,5 @@
 const { GuestBook } = require('./guestBook.js');
 
-const getParams = (rawParams) => {
-  const params = {};
-  for (const [fieldName, fieldValue] of rawParams.entries()) {
-    params[fieldName] = fieldValue;
-  }
-  return params;
-};
-
 const createComment = (name, comment) => {
   const date = new Date().toLocaleString();
   return { name, comment, date };
@@ -18,7 +10,7 @@ const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
   flowerGuestBook.loadComments();
 
   return (req, res) => {
-    const { method, bodyParams } = req;
+    const { method, body } = req;
 
     if (method === 'GET') {
       const html = flowerGuestBook.serveGuestBook();
@@ -26,7 +18,7 @@ const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
       return;
     }
 
-    const { name, comment } = getParams(bodyParams);
+    const { name, comment } = body;
 
     if (!name || !comment) {
       res.status(400);
@@ -40,4 +32,4 @@ const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
   };
 };
 
-module.exports = { guestBookHandler, getParams };
+module.exports = { guestBookHandler };

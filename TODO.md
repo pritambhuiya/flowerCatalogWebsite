@@ -22,6 +22,8 @@
 - [ ] Extract comment entity 
 
 # DONE 
+- [x] Remove server.js, router.js, bodyParser.js, serveStaticFile.js, notFoundHandler.js
+- [x] Replace bodyParser using use express.urlEncoded
 - [x] Replace handlers 
 - [x] Consider renaming homepage.css to index.css
 - [x] Consider renaming homepage.html to index.html

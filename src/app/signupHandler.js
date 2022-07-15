@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { getParams } = require('./guestBookHandler.js');
 
 const serveSignupPage = () => `<html>
 <head>
@@ -29,7 +28,7 @@ const storeUserDetails =
   };
 
 const signupHandler = (userDetailsFile) =>
-  ({ method, bodyParams }, res) => {
+  ({ method, body }, res) => {
     if (method === 'GET') {
       res.set('content-type', 'text/html');
       res.end(serveSignupPage());
@@ -37,12 +36,11 @@ const signupHandler = (userDetailsFile) =>
     }
 
     if (method === 'POST') {
-      const userDetails = getParams(bodyParams);
-      const { name, username, password } = userDetails;
+      const { name, username, password } = body;
       let location = '/signup';
 
       if (name && username && password) {
-        storeUserDetails(userDetails, userDetailsFile);
+        storeUserDetails(body, userDetailsFile);
         location = '/';
       }
 
