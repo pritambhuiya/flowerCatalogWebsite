@@ -21,6 +21,7 @@
 - [ ] Extract comment entity 
 
 # DONE 
+- [x] Extracted serveLogin function
 - [x] Extracted serveSignUp function
 - [x] Extracted addComments function
 - [x] Extracted serveGuestBook function

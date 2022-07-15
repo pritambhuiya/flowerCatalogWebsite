@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const serveSignupPage = () => `<html>
+const signupPage = () => `<html>
 <head>
   <title>Sign up</title>
 </head>
@@ -27,9 +27,9 @@ const storeUserDetails =
     fs.writeFileSync(userDetailsFile, JSON.stringify(register), 'utf8');
   };
 
-const serveSignUpPage = (req, res) => {
+const serveSignupPage = (req, res) => {
   res.set('content-type', 'text/html');
-  res.end(serveSignupPage());
+  res.end(signupPage());
 };
 
 const signupHandler = (userDetailsFile) =>
@@ -46,4 +46,4 @@ const signupHandler = (userDetailsFile) =>
     res.end();
   };
 
-module.exports = { signupHandler, serveSignUpPage };
+module.exports = { signupHandler, serveSignupPage };

@@ -1,4 +1,4 @@
-const serveLoginPage = () => `<html>
+const loginPage = () => `<html>
 <head>
   <title>Login</title>
 </head>
@@ -23,28 +23,31 @@ const createSession = (cookies, sessions) => {
   return session;
 };
 
+const serveLoginPage = ({ session }, res) => {
+  if (!session) {
+    res.end(loginPage());
+    return;
+  }
+
+  res.redirect(302, '/guestBook');
+  res.end();
+};
+
 const loginHandler = sessions =>
-  ({ method, session, cookies, body }, res) => {
-
-    if (!session && method === 'GET') {
-      res.end(serveLoginPage());
-      return;
-    }
-
-    let location = '/guestBook';
-    if (!session && method === 'POST') {
+  ({ session, cookies, body }, res) => {
+    let location = '/login';
+    if (!session) {
       const { username, password } = body;
 
       if (username && password) {
         const session = createSession(cookies, sessions);
         res.cookie('sessionId', session.sessionId);
-        location = '/login';
+        location = '/guestBook';
       }
     }
 
     res.redirect(302, location);
     res.end();
-
   };
 
-exports.loginHandler = loginHandler;
+module.exports = { loginHandler, serveLoginPage };

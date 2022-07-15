@@ -1,9 +1,9 @@
 const { addComments, serveGuestBook } = require('./app/guestBookHandler.js');
 const { injectCookies } = require('./app/injectCookies.js');
 const { injectSession } = require('./app/injectSession.js');
-const { loginHandler } = require('./app/loginHandler.js');
+const { loginHandler, serveLoginPage } = require('./app/loginHandler.js');
 const { logoutHandler } = require('./app/logoutHandler.js');
-const { signupHandler, serveSignUpPage } = require('./app/signupHandler.js');
+const { signupHandler, serveSignupPage } = require('./app/signupHandler.js');
 // const { multiPartHandler } = require('./app/multiPartHandler.js');
 
 const logger = ({ method, url }, res, next) => {
@@ -28,10 +28,10 @@ const createApp = (config, sessions, guestBook) => {
   app.post('/guestBook', addComments(guestBook));
   app.get('/api/comments', comments(guestBook));
 
-  app.get('/signup', serveSignUpPage);
+  app.get('/signup', serveSignupPage);
   app.post('/signup', signupHandler(userDetails));
 
-  app.get('/login', loginHandler(sessions));
+  app.get('/login', serveLoginPage);
   app.post('/login', loginHandler(sessions));
 
   app.get('/logout', logoutHandler(sessions));
