@@ -17,12 +17,8 @@ const guestBookHandler = (commentsFile, guestBookTemplateFile) => {
   const flowerGuestBook = new GuestBook(commentsFile, guestBookTemplateFile);
   flowerGuestBook.loadComments();
 
-  return (req, res, next) => {
-    const { url, method, bodyParams } = req;
-    if (url !== '/guestBook') {
-      next();
-      return;
-    }
+  return (req, res) => {
+    const { method, bodyParams } = req;
 
     if (method === 'GET') {
       const html = flowerGuestBook.serveGuestBook();

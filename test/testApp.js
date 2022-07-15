@@ -2,7 +2,7 @@ const request = require('supertest');
 
 const { createApp } = require('../src/app.js');
 
-describe('GET /', () => {
+describe('Testing app', () => {
   let app;
   beforeEach(() => {
     const sessions = {};
@@ -125,32 +125,32 @@ describe('GET /', () => {
           .expect(200, done);
       });
 
-    it('Should redirect to login page if method is POST and session is not present',
-      (done) => {
-        request(app)
-          .post('/login')
-          .send('username=sai&password=1234')
-          .expect('location', '/guestBook')
-          .expect(302, done);
-      });
-
     it('Should redirect to guestBook if method is POST and session is present',
       (done) => {
         request(app)
           .post('/login')
           .set('cookie', 'sessionId=1234')
           .send('username=sai&password=1234')
-          .expect('location', '/guestBook')
+          .expect('location', '/login')
           .expect(302, done);
       });
 
-    it('Should redirect to login if method is POST and session is present and username or password is not present',
+    it('Should redirect to login page if method is POST and session is not present',
+      (done) => {
+        request(app)
+          .post('/login')
+          .send('username=sai&password=1234')
+          .expect('location', '/login')
+          .expect(302, done);
+      });
+
+    it('Should redirect to login if method is POST and session is not present and username or password is not present',
       (done) => {
         request(app)
           .post('/login')
           .set('cookie', 'sessionId=1234')
           .send('')
-          .expect('location', '/login')
+          .expect('location', '/guestBook')
           .expect(302, done);
       });
   });

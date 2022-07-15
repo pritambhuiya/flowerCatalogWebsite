@@ -19,7 +19,6 @@ const createApp = ({ resource, userDetails, commentsFile, guestBookTemplateFile 
 
   app.use(logger);
   app.use(express.static(resource));
-  app.get('/ab', (req, res) => res.end('hi'));
 
   app.use(injectCookies);
   app.use(injectSession(sessions));

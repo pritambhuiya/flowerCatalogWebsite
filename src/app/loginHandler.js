@@ -26,32 +26,27 @@ const createSession = (cookies, sessions) => {
 };
 
 const loginHandler = sessions =>
-  ({ url, method, session, cookies, bodyParams }, res, next) => {
-
-    if (url !== '/login') {
-      next();
-      return;
-    }
+  ({ method, session, cookies, bodyParams }, res) => {
 
     if (!session && method === 'GET') {
       res.end(serveLoginPage());
       return;
     }
 
-    let location = '/login';
+    let location = '/guestBook';
     if (!session && method === 'POST') {
-      const userDetails = getParams(bodyParams);
-      const { username, password } = userDetails;
+      const { username, password } = getParams(bodyParams);
 
       if (username && password) {
         const session = createSession(cookies, sessions);
         res.cookie('sessionId', session.sessionId);
-        location = '/guestBook';
+        location = '/login';
       }
     }
 
     res.redirect(302, location);
     res.end();
+
   };
 
 exports.loginHandler = loginHandler;

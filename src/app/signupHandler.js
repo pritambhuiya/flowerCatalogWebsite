@@ -29,12 +29,7 @@ const storeUserDetails =
   };
 
 const signupHandler = (userDetailsFile) =>
-  ({ url, method, bodyParams }, res, next) => {
-    if (url !== '/signup') {
-      next();
-      return;
-    }
-
+  ({ method, bodyParams }, res) => {
     if (method === 'GET') {
       res.set('content-type', 'text/html');
       res.end(serveSignupPage());

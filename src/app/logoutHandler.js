@@ -1,7 +1,7 @@
 const logoutHandler = sessions =>
-  ({ url, method, cookies }, res, next) => {
+  ({ method, cookies }, res, next) => {
 
-    if (url !== '/logout' || method === 'POST') {
+    if (method === 'POST') {
       next();
       return;
     }
