@@ -1,11 +1,5 @@
 const logoutHandler = sessions =>
-  ({ method, cookies }, res, next) => {
-
-    if (method === 'POST') {
-      next();
-      return;
-    }
-
+  ({ cookies }, res) => {
     const sessionId = cookies && cookies.sessionId;
     if (sessionId) {
       delete sessions[sessionId];

@@ -11,11 +11,19 @@ const logger = ({ method, url }, res, next) => {
   next();
 };
 
+const comments = (guestBook) => (req, res) => {
+  res.end(guestBook.comments);
+};
+
 const express = require('express');
 
 const createApp = (config, sessions, guestBook) => {
   const { resource, userDetails } = config;
   const app = express();
+
+  const loginRouter = express.Router();
+  const signupRouter = express.Router();
+  const guestBookRouter = express.Router();
 
   app.use(logger);
   app.use(express.urlencoded({ extended: true }));
@@ -24,23 +32,22 @@ const createApp = (config, sessions, guestBook) => {
   app.use(injectCookies);
   app.use(injectSession(sessions));
 
-  app.get('/guestBook', serveGuestBook(guestBook));
-  app.post('/guestBook', addComments(guestBook));
-  app.get('/api/comments', comments(guestBook));
+  app.use('/login', loginRouter);
+  loginRouter.get('', serveLoginPage);
+  loginRouter.post('', loginHandler(sessions));
 
-  app.get('/signup', serveSignupPage);
-  app.post('/signup', signupHandler(userDetails));
-
-  app.get('/login', serveLoginPage);
-  app.post('/login', loginHandler(sessions));
+  app.use('/signup', signupRouter);
+  signupRouter.get('/', serveSignupPage);
+  signupRouter.post('/', signupHandler(userDetails));
 
   app.get('/logout', logoutHandler(sessions));
-  app.post('/logout', logoutHandler(sessions));
-  return app;
-};
 
-const comments = (guestBook) => (req, res) => {
-  res.end(guestBook.comments);
+  app.use('/guestBook', guestBookRouter);
+  guestBookRouter.get('/', serveGuestBook(guestBook));
+  guestBookRouter.post('/', addComments(guestBook));
+
+  app.get('/api/comments', comments(guestBook));
+  return app;
 };
 
 module.exports = { createApp };

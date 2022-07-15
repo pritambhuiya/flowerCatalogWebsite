@@ -21,7 +21,8 @@
 - [ ] Extract comment entity 
 
 # DONE 
-- [x] Extracted serveLogin function
+- [x] Implement router
+- [x] Extracted serveLoginPage function
 - [x] Extracted serveSignUp function
 - [x] Extracted addComments function
 - [x] Extracted serveGuestBook function
